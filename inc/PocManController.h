@@ -17,9 +17,9 @@ public:
                    struct dataSet *data) const;
     virtual Action getAction(struct chromosome *chromo) const;
 
-private:
+protected:
     const PocManLevel level_;
-    const unsigned int nMaxTurns_ = 100;
+    const unsigned int nMaxTurns_ = 200;
     const unsigned int nRepeats_  = 10;
 };
 

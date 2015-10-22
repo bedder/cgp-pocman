@@ -75,11 +75,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\cgp.cpp" />
     <ClCompile Include="src\PocManController.cpp" />
+    <ClCompile Include="src\PocManControllerInput.cpp" />
     <ClCompile Include="src\PocManState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\cgp.h" />
     <ClInclude Include="inc\PocManController.h" />
+    <ClInclude Include="inc\PocManControllerInput.h" />
     <ClInclude Include="inc\PocManState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
