@@ -13,7 +13,9 @@ typedef enum {
     North = 0, East = 1, South = 2, West = 3
 } Action;
 enum class PocManLevel {
-    Default
+    Default,
+    Level1,
+    Level2
 };
 
 class PocManState {
