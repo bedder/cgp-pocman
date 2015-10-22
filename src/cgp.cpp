@@ -22,8 +22,12 @@
 #include <ctime>
 #include <cmath>
 #include <cfloat>
+#include <string>
+#include <sstream>
 
 #include "cgp.h"
+
+
 #if defined(_MSC_VER) && _MSC_VER < 1900
 	// Visual Studio 2013 doesn't implement snprintf for some reason.
 	#include <cstdarg>
@@ -53,7 +57,6 @@
 	}
 
 #endif
-
 #define M_PI 3.142
 
 /*
@@ -335,6 +338,23 @@ DLL_EXPORT void printParameters(struct parameters *params){
 	printf("Update frequency:\t\t\t%d\n", params->updateFrequency);
 	printFunctionSet(params);
 	printf("-----------------------------------------------------------\n\n");
+}
+
+DLL_EXPORT std::string parametersToString(struct parameters* params) {
+  std::stringstream ss;
+  ss << "Evolutionary Strategy: ("
+     << params->mu << params->evolutionaryStrategy << params->lambda << ")-ES\n";
+  ss << "Inputs:                " << params->numInputs              << "\n";
+  ss << "Outputs:               " << params->numOutputs             << "\n";
+  ss << "Nodes:                 " << params->numNodes               << "\n";
+  ss << "Arity:                 " << params->arity                  << "\n";
+  ss << "Mutation Type:         " << params->mutationTypeName       << "\n";
+  ss << "Mutation Rate:         " << params->mutationRate           << "\n";
+  ss << "Fitness Function:      " << params->fitnessFunctionName    << "\n";
+  ss << "Fitness Target:        " << params->targetFitness          << "\n";
+  ss << "Selection Scheme:      " << params->selectionSchemeName    << "\n";
+  ss << "Reproduction Scheme:   " << params->reproductionSchemeName << "\n";
+  return ss.str();
 }
 
 
@@ -1142,7 +1162,51 @@ DLL_EXPORT void printChromosome(struct chromosome *chromo, int weights){
 	printf("\n\n");
 }
 
+DLL_EXPORT std::string chromosomeToString(struct chromosome* chromo, int weights) {
+  std::stringstream ss;
 
+  int i, j;
+  /* error checking */
+  if (chromo == NULL) {
+    printf("Error: chromosome has not been initialised and cannot be printed.\n");
+    return "";
+  }
+  /* set the active nodes in the given chromosome */
+  setChromosomeActiveNodes(chromo);
+  /* for all the chromo inputs*/
+  for (i = 0; i<chromo->numInputs; i++) {
+    ss << "(" << i << "):\tinput\n";
+  }
+  /* for all the hidden nodes */
+  for (i = 0; i < chromo->numNodes; i++) {
+    /* print the node function */
+    ss << "(" << (chromo->numInputs + i) << "):\t"
+       << chromo->funcSet->functionNames[chromo->nodes[i]->function] << "\t";
+    /* for the arity of the node */
+    for (j = 0; j < getChromosomeNodeArity(chromo, i); j++) {
+      /* print the node input information */
+      if (weights == 1) {
+        ss << chromo->nodes[i]->inputs[j] << ","
+           << chromo->nodes[i]->weights[j] << "\t";
+      } else {
+        ss << chromo->nodes[i]->inputs[j] << " ";
+      }
+    }
+    /* Highlight active nodes */
+    if (chromo->nodes[i]->active == 1) {
+      ss << "*";
+    }
+    ss << "\n";
+  }
+  /* for all of the outputs */
+  ss << "outputs: ";
+  for (i = 0; i < chromo->numOutputs; i++) {
+    /* print the output node locations */
+    ss << chromo->outputNodes[i] << " ";
+  }
+  ss << "\n\n";
+  return ss.str();
+}
 
 /*
 	Executes the given chromosome

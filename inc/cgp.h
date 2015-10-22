@@ -263,6 +263,8 @@
 	*/
 	DLL_EXPORT void printParameters(struct parameters *params);
 	
+  DLL_EXPORT std::string parametersToString(struct parameters *params);
+
 	/*
 		Function: addNodeFunction
 
@@ -955,6 +957,7 @@
 	*/
 	DLL_EXPORT void printChromosome(struct chromosome *chromo, int weights);
 
+  DLL_EXPORT std::string chromosomeToString(struct chromosome *chromo, int weights);
 
 	/*
 		Function: executeChromosome
