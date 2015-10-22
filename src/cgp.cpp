@@ -287,7 +287,7 @@ DLL_EXPORT struct parameters *initialiseParameters(const int numInputs, const in
 	strncpy(params->reproductionSchemeName, "mutateRandomParent", REPRODUCTIONSCHEMENAMELENGTH);
 
 	/* Seed the random number generator */
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 
 	return params;
 }
@@ -2711,7 +2711,7 @@ static void pointMutation(struct parameters *params, struct chromosome *chromo){
 	numGenes = numFunctionGenes + numInputGenes + numOutputGenes;
 
 	/* calculate the number of genes to mutate */
-	numGenesToMutate = (int)roundf(numGenes * params->mutationRate);
+	numGenesToMutate = (int)round(numGenes * params->mutationRate);
 
 	/* for the number of genes to mutate */
 	for(i=0; i<numGenesToMutate; i++){
@@ -2771,7 +2771,7 @@ static void pointMutationANN(struct parameters *params, struct chromosome *chrom
 	numGenes = numFunctionGenes + numInputGenes + numWeightGenes + numOutputGenes;
 
 	/* calculate the number of genes to mutate */
-	numGenesToMutate = (int)roundf(numGenes * params->mutationRate);
+	numGenesToMutate = (int)round(numGenes * params->mutationRate);
 
 	/* for the number of genes to mutate */
 	for(i=0; i<numGenesToMutate; i++){
