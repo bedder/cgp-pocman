@@ -207,18 +207,18 @@ std::string PocManState::toString() const {
 int PocManState::performAction(Action action) {
     unsigned int newLoc = indexAfterAction(loc_, action);
     if (wall_[newLoc])
-        return -10; // Punish invalid actions
+        return INV_PUNISH; // Punish invalid actions
     loc_ = newLoc;
-    int reward = -1;
     if (pellet_[loc_]) {
         pellet_[loc_] = false;
         nPellets_--;
         if (nPellets_)
-            reward = 10;
+            return PLT_REWARD;
         else
-            reward = 100;
+            return PLT_REWARD + CLR_REWARD;
     }
-    return reward;
+    // We've performed a valid action, but haven't eaten a pellet
+    return STP_PUNISH;
 }
 
 // Helper functions
@@ -255,13 +255,13 @@ bool PocManState::canSeePellet(Action action) const {
 bool PocManState::canSmellPellet() const {
     unsigned int smellArea = smellDistance_ * 2 + 1;
     unsigned int northWest = loc_;
-    for (auto i=0 ; i<smellDistance_ ; i++) {
+    for (unsigned int i=0 ; i<smellDistance_ ; i++) {
         northWest = indexAfterAction(northWest, Action::North);
         northWest = indexAfterAction(northWest, Action::West);
     }
-    for (int offsetY = 0 ; offsetY < smellArea ; offsetY++) {
+    for (unsigned int offsetY = 0 ; offsetY < smellArea ; offsetY++) {
         unsigned int index = northWest;
-        for (auto i=0 ; i<offsetY ; i++) {
+        for (unsigned int i=0 ; i<offsetY ; i++) {
             index = indexAfterAction(index, Action::South);
             if (pellet_[index])
                 return true;

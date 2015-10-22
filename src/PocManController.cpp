@@ -37,7 +37,11 @@ double PocManController::runGame(struct parameters *params,
             }
         }
     }
-    return -cumulativeReward / nRepeats_;
+    double maxReward = nMaxTurns_ * PLT_REWARD + CLR_REWARD;
+    double averageReward = cumulativeReward / nRepeats_;
+
+    // Return the regret of the current strategy
+    return maxReward - averageReward;
 }
 
 Action PocManController::getAction(struct chromosome *chromo) const {
@@ -46,7 +50,7 @@ Action PocManController::getAction(struct chromosome *chromo) const {
     double bestValue = -DBL_MAX;
     for (unsigned int i=0; i<4 ; i++) {
         double currentValue = getChromosomeOutput(chromo, i);
-        if (currentValue > bestValue) {
+        if (currentValue >= bestValue) {
             bestValue = currentValue;
             bestAction = (Action)i;
         }

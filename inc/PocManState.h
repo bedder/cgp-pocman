@@ -18,6 +18,11 @@ enum class PocManLevel {
     Level2
 };
 
+static const unsigned int PLT_REWARD = 10;
+static const unsigned int CLR_REWARD = 100;
+static const unsigned int STP_PUNISH = -1;
+static const unsigned int INV_PUNISH = -20;
+
 class PocManState {
 public:
     // Constructors
@@ -45,6 +50,7 @@ private:
 private:
     static const unsigned int w_ = 28;
     static const unsigned int h_ = 31;
+
     std::array<bool, w_ * h_> wall_;
     std::array<bool, w_ * h_> pellet_;
     unsigned int nPellets_;
