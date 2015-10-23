@@ -44,7 +44,7 @@ void log(const std::string& str) {
 }
 
 // Calculates the mean and standard deviation from a std::vector<double>
-std::tuple<double, double> calculateStats(const std::vector<double>& vec) {
+std::tuple<double, double, double, double> calculateStats(const std::vector<double>& vec) {
   int n = vec.size();
   double sum = std::accumulate(vec.begin(), vec.end(), 0.0);
   double mean = sum / n;
@@ -54,7 +54,9 @@ std::tuple<double, double> calculateStats(const std::vector<double>& vec) {
                                            0.0);
   double meanOfSquare = sumOfSquares / n;
   double stdev = std::sqrt(meanOfSquare - squareOfMean);
-  return std::make_tuple(mean, stdev);
+  double min = *std::min_element(vec.begin(), vec.end());
+  double max = *std::max_element(vec.begin(), vec.end());
+  return std::make_tuple(mean, stdev, min, max);
 }
 
 // Runs a full round of experiments
@@ -96,11 +98,11 @@ void performExperiments(struct parameters* params,
   }
 
   // Stats!
-  double meanFitness, stdevFitness;
-  std::tie(meanFitness, stdevFitness) = calculateStats(fitnesses);
+  double meanFitness, stdevFitness, minFitness, maxFitness;
+  std::tie(meanFitness, stdevFitness, minFitness, maxFitness) = calculateStats(fitnesses);
 
-  double meanDuration, stdevDuration;
-  std::tie(meanDuration, stdevDuration) = calculateStats(durations);
+  double meanDuration, stdevDuration, minDuration, maxDuration;
+  std::tie(meanDuration, stdevDuration, minDuration, maxDuration) = calculateStats(durations);
 
   // Logging!
   log("### PARAMETERS\n");
@@ -113,6 +115,7 @@ void performExperiments(struct parameters* params,
   log("### STATISTICS (FITNESS)\n");
   log("mean : " + std::to_string(meanFitness) + "\n");
   log("std  : " + std::to_string(stdevFitness) + "\n");
+  log("rng  : " + std::to_string(minFitness) +":" + std::to_string(maxFitness) + "\n");
   log("\n--------------------\n\n");
   log("### DURATION VALUES\n");
   for (unsigned int i = 0; i < nRepeats; i++)
@@ -121,6 +124,7 @@ void performExperiments(struct parameters* params,
   log("### STATISTICS (DURATIONS)\n");
   log("mean : " + std::to_string(meanDuration) + "\n");
   log("std  : " + std::to_string(stdevDuration) + "\n");
+  log("rng  : " + std::to_string(minDuration) + ":" + std::to_string(maxDuration) + "\n");
   log("\n--------------------\n\n");
   log("### BEST CHROMOSOME\n");
   log(chromosomeToString(bestChromosome, 0));

@@ -23,7 +23,7 @@ double fitness(struct parameters *params,
 
 void log(const std::string& str);
 
-std::tuple<double, double> calculateStats(const std::vector<double>& vec);
+std::tuple<double, double, double, double> calculateStats(const std::vector<double>& vec);
 
 void performExperiments(struct parameters* params,
                         unsigned int nGenerations,

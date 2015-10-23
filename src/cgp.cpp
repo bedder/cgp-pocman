@@ -347,6 +347,12 @@ DLL_EXPORT std::string parametersToString(struct parameters* params) {
   ss << "Inputs:                " << params->numInputs              << "\n";
   ss << "Outputs:               " << params->numOutputs             << "\n";
   ss << "Nodes:                 " << params->numNodes               << "\n";
+  ss << "Node functions:        ";
+  int i = 0;
+  for (int i = 0; i < params->funcSet->numFunctions; i++)
+    ss << params->funcSet->functionNames[i]
+       << (i < params->funcSet->numFunctions - 1 ? "," : "");
+  ss << "\n";
   ss << "Arity:                 " << params->arity                  << "\n";
   ss << "Mutation Type:         " << params->mutationTypeName       << "\n";
   ss << "Mutation Rate:         " << params->mutationRate           << "\n";
