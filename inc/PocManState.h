@@ -35,6 +35,7 @@ public:
 
     // Accessors
     std::array<double, 9> getSenses() const;
+    unsigned int nPellets() const { return nPellets_; }
     bool isTerminal() const;
     std::string toString() const;
 

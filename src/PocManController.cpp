@@ -32,12 +32,13 @@ double PocManController::runGame(struct parameters *params,
             cumulativeReward += game.performAction(action);
             // Are we at a terminal game state?
             if (game.isTerminal()) {
-                cumulativeReward += 100;
+                cumulativeReward += CLR_REWARD;
                 break;
             }
         }
     }
-    double maxReward = nMaxTurns_ * PLT_REWARD + CLR_REWARD;
+    double maxReward = std::min(nMaxTurns_, PocManState(level_).nPellets()) * PLT_REWARD
+                       + (nMaxTurns_ > PocManState(level_).nPellets()) * CLR_REWARD;
     double averageReward = cumulativeReward / nRepeats_;
 
     // Return the regret of the current strategy
