@@ -15,6 +15,7 @@ public:
     double runGame(struct parameters *params,
                    struct chromosome *chromo,
                    struct dataSet *data) const;
+    std::string generateGameTrace(struct chromosome* chromo) const;
     virtual Action getAction(struct chromosome *chromo) const;
 
 protected:

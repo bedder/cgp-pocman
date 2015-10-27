@@ -44,6 +44,33 @@ double PocManController::runGame(struct parameters *params,
     return maxReward - averageReward;
 }
 
+std::string PocManController::generateGameTrace(struct chromosome* chromo) const {
+    std::stringstream ss;
+    PocManState game = PocManState(level_);
+    for (unsigned int turn = 0 ; turn<nMaxTurns_ ; turn++) {
+        auto observation = game.getSenses();
+        executeChromosome(chromo, &observation[0]);
+        // Calculate action from output chromosome
+        Action action = getAction(chromo);
+        // Record the action
+        if (action == North)
+          ss << "N";
+        else if (action == East)
+          ss << "E";
+        else if (action == South)
+          ss << "S";
+        else
+          ss << "W";
+        // Apply the action, and ignore the reward
+        game.performAction(action);
+        // Are we at a terminal game state?
+        if (game.isTerminal()) {
+            break;
+        }
+    }
+    return ss.str();
+}
+
 Action PocManController::getAction(struct chromosome *chromo) const {
     // Greedy action selection
     Action bestAction;

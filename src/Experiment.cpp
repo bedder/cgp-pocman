@@ -43,6 +43,10 @@ void log(const std::string& str) {
   logFile << str;
 }
 
+void generateTrace(struct chromosome *chromo) {
+
+}
+
 // Calculates the mean and standard deviation from a std::vector<double>
 std::tuple<double, double, double, double> calculateStats(const std::vector<double>& vec) {
   int n = vec.size();
@@ -128,4 +132,7 @@ void performExperiments(struct parameters* params,
   log("\n--------------------\n\n");
   log("### BEST CHROMOSOME\n");
   log(chromosomeToString(bestChromosome, 0));
+  log("\n--------------------\n\n");
+  log("### GAMEPLAY TRACE\n");
+  log(controller.generateGameTrace(bestChromosome));
 }
