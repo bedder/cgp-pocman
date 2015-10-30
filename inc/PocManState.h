@@ -18,10 +18,11 @@ enum class PocManLevel {
     Level2
 };
 
-static const unsigned int PLT_REWARD = 10;
-static const unsigned int CLR_REWARD = 100;
-static const unsigned int STP_PUNISH = -1;
-static const unsigned int INV_PUNISH = -20;
+static const int PLT_REWARD = 10;   // Reward for eating a pellet
+static const int CLR_REWARD = 100;  // Reward for clearing the stage
+static const int STP_PUNISH = -1;   // Punishment for stepping
+static const int INV_PUNISH = -20;  // Punishment for walking into a wall
+static const int DTH_PUNISH = -100; // Punishment for dying
 
 class PocManState {
 public:
