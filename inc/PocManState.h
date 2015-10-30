@@ -25,6 +25,11 @@ static const int INV_PUNISH = -20;  // Punishment for walking into a wall
 static const int DTH_PUNISH = -100; // Punishment for dying
 
 class PocManState {
+struct Ghost {
+  unsigned int loc_;
+  Action heading_;
+};
+
 public:
     // Constructors
     PocManState();
@@ -35,7 +40,7 @@ public:
     void generateLevel(PocManLevel level); // Sets up wall_, pellet_, loc_;
 
     // Accessors
-    std::array<double, 9> getSenses() const;
+    std::array<double, 14> getSenses() const;
     unsigned int nPellets() const { return nPellets_; }
     bool isTerminal() const;
     std::string toString() const;
@@ -46,18 +51,22 @@ public:
 private:
     // Helper functions
     unsigned int indexAfterAction(unsigned int index, Action action) const;
-    bool canSeePellet(Action action) const;
-    bool canSmellPellet() const;
+    inline bool canSeeGhost(Action action) const;
+    inline bool canHearGhost() const;
+    inline bool canSmellPellet() const;
 
 private:
     static const unsigned int w_ = 28;
     static const unsigned int h_ = 31;
 
+    bool dead_ = false;
     std::array<bool, w_ * h_> wall_;
     std::array<bool, w_ * h_> pellet_;
     unsigned int nPellets_;
-    unsigned int loc_;
-    unsigned int smellDistance_ = 3;
+    unsigned int hearingDistance_ = 2;
+    unsigned int smellDistance_ = 1;
+    Ghost pocman_;
+    std::array<Ghost, 2> ghosts_;
 };
 
 #endif //CGP_POCMAN_POCMANSTATE_H

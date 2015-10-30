@@ -78,7 +78,7 @@ Action PocManController::getAction(struct chromosome *chromo) const {
     double bestValue = -DBL_MAX;
     for (unsigned int i=0; i<4 ; i++) {
         double currentValue = getChromosomeOutput(chromo, i);
-        if (currentValue >= bestValue) {
+        if (currentValue > bestValue) {
             bestValue = currentValue;
             bestAction = (Action)i;
         }

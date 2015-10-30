@@ -11,8 +11,9 @@
 #include "PocManController.h"
 
 // Constants
-static const unsigned int N_INPUTS  = 9;  // touch(4), sight(4), smell(1)
-static const unsigned int N_OUTPUTS = 4; // N, E, S, W
+static const unsigned int N_INPUTS  = 14; // touch(4), sight(4), heading(4)
+                                          // hearing(1), and smell(1)
+static const unsigned int N_OUTPUTS = 4;  // N, E, S, W
 static const unsigned int FNC_ARITY = 2;
 static const unsigned int UPDATE_FREQ = 0; // Don't print updates to the screen
 static const double TARGET_FITNESS = 0.0;   // We want no regret
