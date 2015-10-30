@@ -39,7 +39,6 @@ double PocManController::runGame(struct parameters *params,
             cumulativeReward += game.performAction(action);
             // Are we at a terminal game state?
             if (game.isTerminal()) {
-                cumulativeReward += CLR_REWARD;
                 break;
             }
         }
