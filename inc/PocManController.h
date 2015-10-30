@@ -7,6 +7,8 @@
 
 #include "PocManState.h"
 
+#include <chrono>
+
 class PocManController {
 public:
     PocManController();
@@ -16,6 +18,10 @@ public:
                    struct chromosome *chromo,
                    struct dataSet *data) const;
     std::string generateGameTrace(struct chromosome* chromo) const;
+#if defined(_WIN32) || defined(_WIN64)
+    void displayAgentPlaythough(struct chromosome* chromo,
+                                std::chrono::milliseconds frameTime) const;
+#endif
     virtual Action getAction(struct chromosome *chromo) const;
 
 protected:
