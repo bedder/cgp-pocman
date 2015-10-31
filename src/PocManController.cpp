@@ -114,7 +114,7 @@ void PocManController::displayAgentPlaythough(struct chromosome* chromo,
 
 Action PocManController::getAction(struct chromosome *chromo) const {
     // Greedy action selection
-    Action bestAction;
+    Action bestAction = North;
     double bestValue = -DBL_MAX;
     for (unsigned int i=0; i<4 ; i++) {
         double currentValue = getChromosomeOutput(chromo, i);
