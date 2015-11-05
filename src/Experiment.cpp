@@ -111,6 +111,7 @@ void performExperiments(struct parameters* params,
   // Logging!
   log("### PARAMETERS\n");
   log(parametersToString(params));
+  log("generations: " + std::to_string(nGenerations) + "\n");
   log("\n--------------------\n\n");
   log("### FITNESS VALUES\n");
   for (unsigned int i = 0; i < nRepeats; i++)
