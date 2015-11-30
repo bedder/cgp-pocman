@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cgp_pocman", "cgp_pocman.vcxproj", "{ECD2BD23-45EC-4172-B376-C67F37F07E6E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cgp_pocman_log_parser", "..\cgp_pocman_log_parser\cgp_pocman_log_parser.vcxproj", "{0D4AF09B-F9E7-4A0A-AA1A-4C2A4E5748FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{ECD2BD23-45EC-4172-B376-C67F37F07E6E}.Debug|Win32.Build.0 = Debug|Win32
 		{ECD2BD23-45EC-4172-B376-C67F37F07E6E}.Release|Win32.ActiveCfg = Release|Win32
 		{ECD2BD23-45EC-4172-B376-C67F37F07E6E}.Release|Win32.Build.0 = Release|Win32
+		{0D4AF09B-F9E7-4A0A-AA1A-4C2A4E5748FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D4AF09B-F9E7-4A0A-AA1A-4C2A4E5748FC}.Debug|Win32.Build.0 = Debug|Win32
+		{0D4AF09B-F9E7-4A0A-AA1A-4C2A4E5748FC}.Release|Win32.ActiveCfg = Release|Win32
+		{0D4AF09B-F9E7-4A0A-AA1A-4C2A4E5748FC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
